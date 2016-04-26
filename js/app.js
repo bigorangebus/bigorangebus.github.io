@@ -46,14 +46,14 @@ new Vue({
 // Initial Data
 function init() {
 	return {
-		passengers: '11',
-		type: 'Reserved',
+		passengers: '',
+		type: '',
 		start: '',
 		end: '',
 		distance: '',
 		time: '',
 		estimate: '',
-		roundTrip: true,
+		roundTrip: false,
 		contact: ''
 	}
 }
