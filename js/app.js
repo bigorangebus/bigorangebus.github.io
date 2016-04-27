@@ -74,6 +74,8 @@ function getQuote() {
 		var minutes = distance.minutes;
 		var rates = getRates(self.type, self.passengers);
 
+		// console.log(rates.base + ' + ( ' + miles + ' * ' + rates.mile + ' ) + ( ' + minutes + ' * ' + rates.minute + ' ) ');
+
 		var quote = rates.base + (miles * rates.mile) + (minutes * rates.minute);
 
 		if (quote < rates.minimum) {
@@ -119,8 +121,6 @@ function getRates(type, passengers) {
 
 	var rates = {};
 
-	console.log('Type:', type);
-
 	if (type === 'Reserved') {
 		rates.minimum = 75;
 	}
@@ -128,7 +128,7 @@ function getRates(type, passengers) {
 		rates.minimum = 25;
 	}
 
-	if (passengers === '11') {
+	if (passengers === 11) {
 
 		rates.base = 12;
 		rates.mile = 2.5;
@@ -153,6 +153,9 @@ function calculateDistance(start, end, calculated) {
 	var service = new google.maps.DistanceMatrixService();
 	var meterToMiles = 0.000621371;
 	var secondToMinutes = 0.0166667;
+
+	start = hack(start);
+	end = hack(end);
 
 	service.getDistanceMatrix({
 		origins: [start],
@@ -179,6 +182,17 @@ function calculateDistance(start, end, calculated) {
 		}
 
 	});
+
+}
+
+// Fixes issue for Salt River Tubing
+function hack(address) {
+
+	if (address.match(/salt river tubing/ig)) {
+		return 'Salt River Tubing, 9200 North Bush Highway, Mesa, AZ 85215';
+	}
+
+	return address;
 
 }
 
