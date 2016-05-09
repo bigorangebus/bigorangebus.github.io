@@ -33,6 +33,8 @@ Vue.transition('fade', {
 	leaveClass: 'zoomOut'
 });
 
+analytics();
+
 new Vue({
 	el: '#app',
 	data: init(),
@@ -106,14 +108,20 @@ function getQuote() {
 
 		self.contact = 'mailto:heath@bigorangebus.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
 
+		mixpanel.track('Received Quote', self.estimate);
+
 	});
 
 }
 
 // Reset to try again
 function reset() {
+
+	mixpanel.track('Clicked Get Another Quote');
+
 	$('.place').val('');
 	this.$data = init();
+	
 }
 
 // Get base rate
@@ -200,4 +208,8 @@ function hack(address) {
 function clearPlace(input) {
 	this.$data[input] = '';
 	$('#' + input).val('');
+}
+
+function analytics() {
+	mixpanel.track('Fare Estimator Loaded');
 }
