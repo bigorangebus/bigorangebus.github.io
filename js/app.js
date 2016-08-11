@@ -15,7 +15,7 @@ Vue.component('places', {
 		}
 	},
 	attached: function() {
-		
+
 		var self = this;
 		var autocomplete = new google.maps.places.Autocomplete(self.$el);
 
@@ -99,14 +99,14 @@ function getQuote() {
 		}
 
 		var subject = 'B.O.B. Fare Estimate';
-		var body = 	'I received a quote of $' + self.estimate.quote.toFixed(2) + '.\n\n' + 
+		var body = 	'I received a quote of $' + self.estimate.quote.toFixed(2) + '.\n\n' +
 					'Here is my information:\n' +
 					'Passengers: ' + self.passengers + '\n' +
 					'Reserved or On Demand: ' + self.type + '\n' +
 					'Starting address: ' + self.start + '\n' +
 					'Destination address: ' + self.end + '\n';
 
-		self.contact = 'mailto:heath@bigorangebus.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+		self.contact = 'mailto:doug@bigorangebus.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
 
 		mixpanel.track('Received Quote', self.estimate);
 
@@ -121,7 +121,7 @@ function reset() {
 
 	$('.place').val('');
 	this.$data = init();
-	
+
 }
 
 // Get base rate
